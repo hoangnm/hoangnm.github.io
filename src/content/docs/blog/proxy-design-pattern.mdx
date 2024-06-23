@@ -1,0 +1,33 @@
+---
+title: Lazy initialize object with Proxy Pattern
+date: 2018-12-01
+tags:
+  - design patterns
+---
+
+Sometimes, you want to **lazy intialize** an object such as websocket to make it's only connected when needed, **(virtual) proxy pattern** can help.
+
+Instead of initializing directly:
+```
+const socket = new Websocket(url);
+```
+Using the Proxy:
+```
+// The proxy controls a web socket instance
+class WebSocketProxy {
+    constructor(options) {
+        this.options = options;
+    }
+    
+    connect() {
+        if (this.socket) {
+            return this.socket;
+        }
+        this.socket = new Websocket(this.options.url);
+        return this.socket;
+    }
+}
+
+const socket = new WebSocketProxy({ url: 'wss://www.example.com/socketserver' });
+socket.connect();
+```

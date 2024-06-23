@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightBlog from 'starlight-blog';
 
 // https://astro.build/config
 export default defineConfig({
@@ -8,21 +9,11 @@ export default defineConfig({
 		starlight({
 			title: 'My Blog',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/hoangnm',
 			},
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', link: '/guides/example/' },
-					],
-				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
-				},
-			],
+			plugins: [starlightBlog({
+				title: 'My Blog',
+			})],
 		}),
 	],
 });
