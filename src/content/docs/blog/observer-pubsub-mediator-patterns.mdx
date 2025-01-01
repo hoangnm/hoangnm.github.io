@@ -1,0 +1,46 @@
+---
+title: The differences between observer, pubsub, and mediator pattern
+date: 2018-05-03
+tags:
+  - design patterns
+---
+
+Understanding the basic differences between the 3 patterns.
+
+**Observer**: the publisher must know and manage observers, observers will be attached to the specific publisher:
+
+```
+const observer = function(data) {
+   console.log('received event');
+};
+Publisher.addObserver(observer);
+Publisher.notify('data');
+```
+
+**Pubsub**: the publisher can publish an event without knowing who are the listeners, publisher and listeners communicate through the *event channel*:
+
+```
+const subscriber = function(data) {
+    console.log('received event');
+};
+Pubsub.on('event', subscriber);
+// Publisher publishes event through Pubsub object
+Pubsub.publish('event', 'data');
+```
+
+**Mediator**: groups logic of domain that has indirect relationship between modules. We can use `Pubsub` (not required, can use other patterns) to manage the workflow :
+
+```
+const Mediator = {
+    init: function() {
+        Pubsub.on('event', doSomething.bind(this));
+    },
+    doSomething: function(data) {  
+        // do other actions, like calling Ajax and notifying another event.
+        Ajax.get('path', data)
+        .then(function(res) {
+            Pubsub.publish('another event', res);
+        });
+    }
+};
+```

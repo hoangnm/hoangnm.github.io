@@ -1,0 +1,69 @@
+---
+title: Daily git commands
+date: 2018-04-30
+tags:
+  - git
+---
+
+Git commands that I use everyday.
+
++ stage files:
+    + all files: `git add .`
+    + specific files: `git add <file1> <file2>`
+
++ unstage files:
+    + all files: `git reset`
+    + specific files: `git reset <file1> <file2>`
+
++ discard unstaged files:
+    + all files: `git checkout -f`
+    + specific files: `git checkout -- <file1> <file2>`
+    
+    
++ checkout:
+    `git checkout -b <new-branch>` (-b for new branch only)
+ 
++ remove branch:
+    `git branch -d <branch-name>` (-D for forcing delete branch)
+    
++ rename branch:
+    `git branch -m <old-branch-name> <new-branch-name>`
+
+
++ commit with message:
+    `git commit -m "title message" -m "description message"`
+
++ commit and rewrite using last commit:
+    `git commit --amend --no-edit`
+
++ push new branch:
+    `git push -u origin HEAD`
+
++ push:
+    `git push` (add `--force` to completely overwrite the remote branch)
+
++ pull:
+    `git pull`
+    
++ reset commit (rewrite history):
+    `git reset HEAD~1` 
+
++ merge:
+    `git merge <branch-name>`
+
++ rebase:
+    `git rebase <branch-name>`
+
++ cherry pick commit:
+    `git cherry-pick <commmit-id>`
+
++ stash save:
+    `git stash save`
+
++ stash apply:
+    `git stash apply`
++ log:
+    + normal: `git log`
+    + details: `git log -p`
+    + one line: `git log --oneline`
+    + graph: `git log --graph`
